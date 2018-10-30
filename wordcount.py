@@ -40,17 +40,25 @@ print_words() and print_top().
 """
 
 import sys
+from collections import Counter
 
-# +++your code here+++
-# Define print_words(filename) and print_top(filename) functions.
-# You could write a helper utility function that reads a file
-# and builds and returns a word/count dict for it.
-# Then print_words() and print_top() can just call the utility function.
 
-###
+def handle_file(file):
+    with open(file, 'r') as file:
+        words = file.read().lower().split()
+    return Counter(words)
 
-# This basic command line argument parsing code is provided and
-# calls the print_words() and print_top() functions which you must define.
+
+def print_words(file):
+    word_count = handle_file(file).items()
+    for k, v in word_count:
+        print(k + ' ' + str(v))
+
+
+def print_top(file):
+    word_count = handle_file(file).items()
+    for k, v in word_count[:20]:
+        print(k + ' ' + str(v))
 
 
 def main():
